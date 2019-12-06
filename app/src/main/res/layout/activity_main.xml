@@ -21,7 +21,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email_login_edit"
-                android:hint="@string/e_mail"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 style="@style/TextInputEditText"/>
 
@@ -44,7 +44,8 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/login_login_button"
             android:text="@string/login"
-            style="@style/MaterialButtonText"/>
+            style="@style/MaterialButtonText"
+            android:onClick="login"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/sign-up_login_button"

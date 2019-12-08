@@ -1,9 +1,13 @@
 <resources>
     <string name="app_name">Diary</string>
     <string name="email">E-mail</string>
-    <string name="password">Senha</string>
     <string name="login">Login</string>
     <string name="sign_up">Cadastrar</string>
     <string name="invalid_email">E-mail inválido</string>
     <string name="empty_field">Campo vazio</string>
+    <string name="password">Senha</string>
+    <string name="confirm_password">Confirmar senha</string>
+    <string name="cancel">Cancelar</string>
+    <string name="create_an_account">Crie uma conta</string>
+    <string name="password_different">Senhas diferentes</string>
 </resources>

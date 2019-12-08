@@ -2,11 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    tools:context=".MainActivity">
+    style="@style/ScrollView"
+    tools:context=".gui.MainActivity">
 
-    <LinearLayout style="@style/LienarLayoutVertical30">
+    <LinearLayout style="@style/LinearLayoutVertical30">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="200dp"
@@ -16,7 +15,6 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/email_login_layout"
             style="@style/TextInputLayoutFilledBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -29,7 +27,6 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/password_login_layout"
             style="@style/TextInputLayoutFilledBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -50,7 +47,8 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/sign-up_login_button"
             android:text="@string/sign_up"
-            style="@style/MaterialButtonText"/>
+            style="@style/MaterialButtonText"
+            android:onClick="signUp"/>
 
     </LinearLayout>
 

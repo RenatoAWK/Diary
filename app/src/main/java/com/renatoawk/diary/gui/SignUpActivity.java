@@ -10,6 +10,10 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 import com.renatoawk.diary.R;
 import com.renatoawk.diary.Validation;
+import com.renatoawk.diary.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
     private TextInputEditText emailEdit, passwordEdit, confirmPasswordEdit;
@@ -66,8 +70,12 @@ public class SignUpActivity extends AppCompatActivity {
         boolean confirmationPasswordValid = Validation.isPasswordValid(confirmPasswordEdit, getApplicationContext());
         boolean passwordsEqual = Validation.isPasswordsEqual(passwordEdit, confirmPasswordEdit, getApplicationContext());
         if (emailValid && passwordValid && confirmationPasswordValid && passwordsEqual){
-            ///// cadastrar aqui
-            Toast.makeText(getApplicationContext(),"OKAY",Toast.LENGTH_LONG).show();
+            Map<String, String> map = new HashMap<>();
+            map.put("email",emailEdit.getText().toString());
+            map.put("password",passwordEdit.getText().toString());
+            map.put("type","signup");
+            Volley.requestSignUp(getApplicationContext(), map);
+
         }
     }
 

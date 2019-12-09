@@ -1,5 +1,7 @@
 package com.renatoawk.diary;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -9,6 +11,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.renatoawk.diary.gui.ProgressBarDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +20,9 @@ import java.util.Map;
 
 public class Volley {
     public static void requestLogin(final Context context, final Map<String, String> map){
+        final ProgressBarDialog progressBarDialog = new ProgressBarDialog(context);
+        progressBarDialog.openDialog();
+
         RequestQueue requestQueue = com.android.volley.toolbox.Volley.newRequestQueue(context);
         String url = "https://diary-node.herokuapp.com/user";
         Response.Listener responseListener = new Response.Listener<String>() {
@@ -25,10 +31,14 @@ public class Volley {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.has("status")){
-                        if (jsonObject.get("status").equals("not OKAY")){
-                            Toast.makeText(context, "not OKAY",Toast.LENGTH_SHORT).show();
+                        if (jsonObject.get("status").equals("not OK")){
+                            progressBarDialog.closeDialog();
+                            Toast.makeText(context, "not OK",Toast.LENGTH_SHORT).show();
+                        } else if (jsonObject.get("status").equals("OK")){
+                            progressBarDialog.closeDialog();
+                            Toast.makeText(context, "OK",Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(context, "OKAY",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "not OK error",Toast.LENGTH_SHORT).show();
                         }
 
                     } else {
@@ -41,10 +51,13 @@ public class Volley {
                         user.setHour(jsonObject.getString("__hour"));
                         user.setTheme(jsonObject.getInt("__theme"));
                         Session.user = user;
+                        progressBarDialog.closeDialog();
                     }
 
                 } catch (JSONException e) {
                     Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                    progressBarDialog.closeDialog();
+
                 }
             }
 
@@ -55,6 +68,8 @@ public class Volley {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, error.getMessage(),Toast.LENGTH_LONG).show();
+                progressBarDialog.closeDialog();
+
             }
         };
 
@@ -70,6 +85,8 @@ public class Volley {
 
 
     public static void requestSignUp(final Context context, final Map<String, String> map){
+        final ProgressBarDialog progressBarDialog = new ProgressBarDialog(context);
+        progressBarDialog.openDialog();
 
         RequestQueue requestQueue = com.android.volley.toolbox.Volley.newRequestQueue(context);
         String url = "https://diary-node.herokuapp.com/user";
@@ -79,16 +96,24 @@ public class Volley {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.has("status")){
-                        if (jsonObject.get("status").equals("not OKAY")){
-                            Toast.makeText(context, "not OKAY",Toast.LENGTH_SHORT).show();
+                        if (jsonObject.get("status").equals("not OK")){
+                            progressBarDialog.closeDialog();
+                            Toast.makeText(context, "not OK",Toast.LENGTH_SHORT).show();
+
+                        } else if (jsonObject.get("status").equals("OK")){
+                            progressBarDialog.closeDialog();
+                            ((Activity) context).finish();
                         } else {
-                            Toast.makeText(context, "OKAY",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "not OK error",Toast.LENGTH_SHORT).show();
+
                         }
 
                     }
 
                 } catch (JSONException e) {
+                    progressBarDialog.closeDialog();
                     Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+
                 }
             }
 
@@ -97,6 +122,7 @@ public class Volley {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressBarDialog.closeDialog();
                 Toast.makeText(context, error.getMessage(),Toast.LENGTH_LONG).show();
             }
         };

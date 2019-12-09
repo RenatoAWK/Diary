@@ -74,7 +74,7 @@ public class SignUpActivity extends AppCompatActivity {
             map.put("email",emailEdit.getText().toString());
             map.put("password",passwordEdit.getText().toString());
             map.put("type","signup");
-            Volley.requestSignUp(getApplicationContext(), map);
+            Volley.requestSignUp(SignUpActivity.this, map);
 
         }
     }

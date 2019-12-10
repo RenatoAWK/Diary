@@ -13,6 +13,11 @@ public class User {
 
     public User(){}
 
+    public User(String password, String email) {
+        this.password = password;
+        this.email = email;
+    }
+
     public User(String name, String password, String email, Integer id, boolean notify, Calendar hour, Integer theme) {
         this.name = name;
         this.password = password;

@@ -16,7 +16,7 @@ public class Validation {
     }
 
     public static boolean isEmailValid(TextInputEditText textInputEditText, Context context) {
-        if (Validation.isBlank(textInputEditText.getText().toString())) {
+        if (Validation.isBlank(textInputEditText.getText().toString().trim())) {
             textInputEditText.setError(context.getString(R.string.empty_field));
             return false;
         } else {

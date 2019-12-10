@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.renatoawk.diary.R;
+import com.renatoawk.diary.User;
 import com.renatoawk.diary.Validation;
 import com.renatoawk.diary.Volley;
 
@@ -71,10 +72,11 @@ public class SignUpActivity extends AppCompatActivity {
         boolean passwordsEqual = Validation.isPasswordsEqual(passwordEdit, confirmPasswordEdit, getApplicationContext());
         if (emailValid && passwordValid && confirmationPasswordValid && passwordsEqual){
             Map<String, String> map = new HashMap<>();
-            map.put("email",emailEdit.getText().toString());
+            map.put("email",emailEdit.getText().toString().trim());
             map.put("password",passwordEdit.getText().toString());
             map.put("type","signup");
-            Volley.requestSignUp(SignUpActivity.this, map);
+            User user = new User(passwordEdit.getText().toString(), emailEdit.getText().toString().trim());
+            Volley.requestSignUp(SignUpActivity.this, map, user);
 
         }
     }

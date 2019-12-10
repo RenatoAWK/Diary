@@ -84,7 +84,7 @@ public class Volley {
     }
 
 
-    public static void requestSignUp(final Context context, final Map<String, String> map){
+    public static void requestSignUp(final Context context, final Map<String, String> map, final User user){
         final ProgressBarDialog progressBarDialog = new ProgressBarDialog(context);
         progressBarDialog.openDialog();
 
@@ -102,6 +102,7 @@ public class Volley {
 
                         } else if (jsonObject.get("status").equals("OK")){
                             progressBarDialog.closeDialog();
+                            Session.user = user;
                             ((Activity) context).finish();
                         } else {
                             Toast.makeText(context, "not OK error",Toast.LENGTH_SHORT).show();
@@ -112,7 +113,7 @@ public class Volley {
 
                 } catch (JSONException e) {
                     progressBarDialog.closeDialog();
-                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Connection error", Toast.LENGTH_LONG).show();
 
                 }
             }

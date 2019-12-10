@@ -1,8 +1,8 @@
 package com.renatoawk.diary;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -12,19 +12,21 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.renatoawk.diary.gui.ProgressBarDialog;
+import com.renatoawk.diary.gui.NotesActivity;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Map;
 
 public class Volley {
-    public static void requestLogin(final Context context, final Map<String, String> map){
+    public static void requestLogin(final Context context, final Map<String, String> map, User user){
         final ProgressBarDialog progressBarDialog = new ProgressBarDialog(context);
         progressBarDialog.openDialog();
 
         RequestQueue requestQueue = com.android.volley.toolbox.Volley.newRequestQueue(context);
-        String url = "https://diary-node.herokuapp.com/user";
+        final String url = "https://diary-node.herokuapp.com/user";
         Response.Listener responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -34,29 +36,30 @@ public class Volley {
                         if (jsonObject.get("status").equals("not OK")){
                             progressBarDialog.closeDialog();
                             Toast.makeText(context, "not OK",Toast.LENGTH_SHORT).show();
-                        } else if (jsonObject.get("status").equals("OK")){
-                            progressBarDialog.closeDialog();
-                            Toast.makeText(context, "OK",Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(context, "not OK error",Toast.LENGTH_SHORT).show();
                         }
 
                     } else {
                         User user = new User();
-                        user.setName(jsonObject.getString("__name"));
-                        user.setId(jsonObject.getInt("__id"));
-                        user.setEmail(jsonObject.getString("__email"));
-                        user.setPassword(jsonObject.getString("__password"));
-                        user.setNotify(jsonObject.getBoolean("__notify"));
-                        user.setHour(jsonObject.getString("__hour"));
-                        user.setTheme(jsonObject.getInt("__theme"));
+                        user.setName(jsonObject);
+                        user.setID(jsonObject);
+                        user.setEmail(jsonObject);
+                        user.setPassword(jsonObject);
+                        user.setNotify(jsonObject);
+                        user.setTime(jsonObject);
+                        user.setTheme(jsonObject);
                         Session.user = user;
                         progressBarDialog.closeDialog();
+                        ((Activity) context).finish();
+                        Intent notesAcitivity = new Intent(context, NotesActivity.class);
+                        context.startActivity(notesAcitivity);
+
                     }
 
                 } catch (JSONException e) {
-                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                     progressBarDialog.closeDialog();
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
 
                 }
             }

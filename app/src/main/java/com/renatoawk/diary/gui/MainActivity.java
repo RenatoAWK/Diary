@@ -11,7 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.renatoawk.diary.R;
 import com.renatoawk.diary.Session;
+import com.renatoawk.diary.User;
 import com.renatoawk.diary.Validation;
+import com.renatoawk.diary.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private TextInputEditText emailEdit, passwordEdit;
@@ -63,8 +68,12 @@ public class MainActivity extends AppCompatActivity {
         boolean emailValid = Validation.isEmailValid(emailEdit, getApplicationContext());
         boolean passwordValid = Validation.isPasswordValid(passwordEdit, getApplicationContext());
         if (emailValid & passwordValid){
-            ///// login aqui
-            Toast.makeText(getApplicationContext(), "Pegou",Toast.LENGTH_LONG).show();
+            Map<String, String> map = new HashMap<>();
+            map.put("email",emailEdit.getText().toString().trim());
+            map.put("password",passwordEdit.getText().toString());
+            map.put("type","login");
+            User user = new User(passwordEdit.getText().toString(), emailEdit.getText().toString().trim());
+            Volley.requestLogin(MainActivity.this, map, user);
         }
 
     }

@@ -126,8 +126,8 @@ public class User {
     }
 
     public void setTime(JSONObject jsonObject) throws JSONException {
-        if (!jsonObject.isNull("__hour")){
-            this.setHour(jsonObject.getString("__hour"));
+        if (!jsonObject.isNull("__time")){
+            this.setHour(jsonObject.getString("__time"));
         }
     }
 

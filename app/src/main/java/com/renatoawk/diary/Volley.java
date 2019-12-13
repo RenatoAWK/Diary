@@ -11,8 +11,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.renatoawk.diary.gui.ProgressBarDialog;
 import com.renatoawk.diary.gui.NotesActivity;
+import com.renatoawk.diary.gui.ProgressBarDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,35 +26,38 @@ public class Volley {
         progressBarDialog.openDialog();
 
         RequestQueue requestQueue = com.android.volley.toolbox.Volley.newRequestQueue(context);
-        final String url = "https://diary-node.herokuapp.com/user";
+        final String url = "https://diary-node.herokuapp.com/login";
         Response.Listener responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.has("status")){
-                        if (jsonObject.get("status").equals("not OK")){
+                        if (jsonObject.get("status").equals(500)){
                             progressBarDialog.closeDialog();
-                            Toast.makeText(context, "not OK",Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(context, "not OK error",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Request error",Toast.LENGTH_SHORT).show();
+                        } else if (jsonObject.get("status").equals(406)){
+                            Toast.makeText(context, "Unknown error",Toast.LENGTH_SHORT).show();
+                        } else if (jsonObject.get("status").equals(200)){
+                            User user = new User();
+                            JSONArray jsonArray = jsonObject.getJSONArray("results");
+                            user.setName(jsonObject.getJSONArray("results").getJSONObject(0));
+                            user.setID(jsonObject.getJSONArray("results").getJSONObject(0));
+                            user.setEmail(jsonObject.getJSONArray("results").getJSONObject(0));
+                            user.setNotify(jsonObject.getJSONArray("results").getJSONObject(0));
+                            user.setTime(jsonObject.getJSONArray("results").getJSONObject(0));
+                            user.setTheme(jsonObject.getJSONArray("results").getJSONObject(0));
+                            Session.user = user;
+                            progressBarDialog.closeDialog();
+                            ((Activity) context).finish();
+                            Intent notesAcitivity = new Intent(context, NotesActivity.class);
+                            context.startActivity(notesAcitivity);
+
                         }
 
                     } else {
-                        User user = new User();
-                        user.setName(jsonObject);
-                        user.setID(jsonObject);
-                        user.setEmail(jsonObject);
-                        user.setPassword(jsonObject);
-                        user.setNotify(jsonObject);
-                        user.setTime(jsonObject);
-                        user.setTheme(jsonObject);
-                        Session.user = user;
                         progressBarDialog.closeDialog();
-                        ((Activity) context).finish();
-                        Intent notesAcitivity = new Intent(context, NotesActivity.class);
-                        context.startActivity(notesAcitivity);
-
+                        Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
                     }
 
                 } catch (JSONException e) {
@@ -99,19 +102,24 @@ public class Volley {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.has("status")){
-                        if (jsonObject.get("status").equals("not OK")){
+                        if (jsonObject.get("status").equals(500)) {
                             progressBarDialog.closeDialog();
-                            Toast.makeText(context, "not OK",Toast.LENGTH_SHORT).show();
-
-                        } else if (jsonObject.get("status").equals("OK")){
+                            Toast.makeText(context, "Request error", Toast.LENGTH_SHORT).show();
+                        } else if (jsonObject.get("status").equals(406)){
+                            progressBarDialog.closeDialog();
+                            Toast.makeText(context, "Unknown error", Toast.LENGTH_SHORT).show();
+                        } else if (jsonObject.get("status").equals(201)){
                             progressBarDialog.closeDialog();
                             Session.user = user;
                             ((Activity) context).finish();
                         } else {
-                            Toast.makeText(context, "not OK error",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Error",Toast.LENGTH_SHORT).show();
 
                         }
 
+                    } else {
+                        progressBarDialog.closeDialog();
+                        Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
                     }
 
                 } catch (JSONException e) {

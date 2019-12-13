@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
             Map<String, String> map = new HashMap<>();
             map.put("email",emailEdit.getText().toString().trim());
             map.put("password",passwordEdit.getText().toString());
-            map.put("type","login");
             User user = new User(passwordEdit.getText().toString(), emailEdit.getText().toString().trim());
             Volley.requestLogin(MainActivity.this, map, user);
         }

@@ -14,7 +14,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.renatoawk.diary.gui.NotesActivity;
 import com.renatoawk.diary.gui.ProgressBarDialog;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,27 +25,26 @@ public class Volley {
         progressBarDialog.openDialog();
 
         RequestQueue requestQueue = com.android.volley.toolbox.Volley.newRequestQueue(context);
-        final String url = "https://diary-node.herokuapp.com/login";
+        final String url = Constants_url.URL_LOGIN;
         Response.Listener responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    if (jsonObject.has("status")){
-                        if (jsonObject.get("status").equals(500)){
+                    if (jsonObject.has(Constants.STATUS)){
+                        if (jsonObject.get(Constants.STATUS).equals(Constants.INTERNAL_SERVER_ERROR)){
                             progressBarDialog.closeDialog();
                             Toast.makeText(context, "Request error",Toast.LENGTH_SHORT).show();
-                        } else if (jsonObject.get("status").equals(406)){
+                        } else if (jsonObject.get(Constants.STATUS).equals(Constants.NOT_ACCETABLE)){
                             Toast.makeText(context, "Unknown error",Toast.LENGTH_SHORT).show();
-                        } else if (jsonObject.get("status").equals(200)){
+                        } else if (jsonObject.get(Constants.STATUS).equals(Constants.OK)){
                             User user = new User();
-                            JSONArray jsonArray = jsonObject.getJSONArray("results");
-                            user.setName(jsonObject.getJSONArray("results").getJSONObject(0));
-                            user.setID(jsonObject.getJSONArray("results").getJSONObject(0));
-                            user.setEmail(jsonObject.getJSONArray("results").getJSONObject(0));
-                            user.setNotify(jsonObject.getJSONArray("results").getJSONObject(0));
-                            user.setTime(jsonObject.getJSONArray("results").getJSONObject(0));
-                            user.setTheme(jsonObject.getJSONArray("results").getJSONObject(0));
+                            user.setName(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(0));
+                            user.setID(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(0));
+                            user.setEmail(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(0));
+                            user.setNotify(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(0));
+                            user.setTime(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(0));
+                            user.setTheme(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(0));
                             Session.user = user;
                             progressBarDialog.closeDialog();
                             ((Activity) context).finish();
@@ -95,20 +93,20 @@ public class Volley {
         progressBarDialog.openDialog();
 
         RequestQueue requestQueue = com.android.volley.toolbox.Volley.newRequestQueue(context);
-        String url = "https://diary-node.herokuapp.com/user";
+        String url = Constants_url.URL_USER;
         Response.Listener responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    if (jsonObject.has("status")){
-                        if (jsonObject.get("status").equals(500)) {
+                    if (jsonObject.has(Constants.STATUS)){
+                        if (jsonObject.get(Constants.STATUS).equals(Constants.INTERNAL_SERVER_ERROR)) {
                             progressBarDialog.closeDialog();
                             Toast.makeText(context, "Request error", Toast.LENGTH_SHORT).show();
-                        } else if (jsonObject.get("status").equals(406)){
+                        } else if (jsonObject.get(Constants.STATUS).equals(Constants.NOT_ACCETABLE)){
                             progressBarDialog.closeDialog();
                             Toast.makeText(context, "Unknown error", Toast.LENGTH_SHORT).show();
-                        } else if (jsonObject.get("status").equals(201)){
+                        } else if (jsonObject.get(Constants.STATUS).equals(Constants.CREATED)){
                             progressBarDialog.closeDialog();
                             Session.user = user;
                             ((Activity) context).finish();

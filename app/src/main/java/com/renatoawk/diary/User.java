@@ -3,8 +3,6 @@ package com.renatoawk.diary;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Calendar;
-
 public class User {
     private String name;
     private String password;
@@ -96,44 +94,44 @@ public class User {
     }
 
     public void setName(JSONObject jsonObject) throws JSONException {
-        if (!jsonObject.isNull("__name")){
-            this.setName(jsonObject.getString("__name"));
+        if (!jsonObject.isNull(Constants.USER_COLUMN_NAME)){
+            this.setName(jsonObject.getString(Constants.USER_COLUMN_NAME));
         }
     }
 
     public void setID(JSONObject jsonObject) throws JSONException {
-        if (!jsonObject.isNull("__id")){
-            this.setId(jsonObject.getInt("__id"));
+        if (!jsonObject.isNull(Constants.USER_COLUMN_ID)){
+            this.setId(jsonObject.getInt(Constants.USER_COLUMN_ID));
         }
     }
 
     public void setEmail(JSONObject jsonObject) throws JSONException {
-        if (!jsonObject.isNull("__email")){
-            this.setEmail(jsonObject.getString("__email"));
+        if (!jsonObject.isNull(Constants.USER_COLUMN_EMAIL)){
+            this.setEmail(jsonObject.getString(Constants.USER_COLUMN_EMAIL));
         }
     }
 
     public void setPassword(JSONObject jsonObject) throws JSONException {
-        if (!jsonObject.isNull("__password")){
-            this.setPassword(jsonObject.getString("__password"));
+        if (!jsonObject.isNull(Constants.USER_COLUMN_PASSWORD)){
+            this.setPassword(jsonObject.getString(Constants.USER_COLUMN_PASSWORD));
         }
     }
 
     public void setNotify(JSONObject jsonObject) throws JSONException {
-        if (!jsonObject.isNull("__notify")){
-            this.setNotify(jsonObject.getBoolean("__notify"));
+        if (!jsonObject.isNull(Constants.USER_COLUMN_NOTIFY)){
+            this.setNotify(jsonObject.getBoolean(Constants.USER_COLUMN_NOTIFY));
         }
     }
 
     public void setTime(JSONObject jsonObject) throws JSONException {
-        if (!jsonObject.isNull("__time")){
-            this.setHour(jsonObject.getString("__time"));
+        if (!jsonObject.isNull(Constants.USER_COLUMN_TIME)){
+            this.setHour(jsonObject.getString(Constants.USER_COLUMN_TIME));
         }
     }
 
     public void setTheme(JSONObject jsonObject) throws JSONException {
-        if (!jsonObject.isNull("__theme")){
-            this.setTheme(jsonObject.getInt("__theme"));
+        if (!jsonObject.isNull(Constants.USER_COLUMN_THEME)){
+            this.setTheme(jsonObject.getInt(Constants.USER_COLUMN_THEME));
         }
     }
 }

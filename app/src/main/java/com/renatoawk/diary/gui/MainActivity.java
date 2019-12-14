@@ -3,12 +3,14 @@ package com.renatoawk.diary.gui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.renatoawk.diary.Constants;
+import com.renatoawk.diary.Fonts;
 import com.renatoawk.diary.R;
 import com.renatoawk.diary.Session;
 import com.renatoawk.diary.User;
@@ -20,6 +22,9 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private TextInputEditText emailEdit, passwordEdit;
+    private androidx.appcompat.widget.AppCompatTextView textView;
+    private com.google.android.material.button.MaterialButton loginButton, signUpButton;
+    private TextInputLayout emailLayout, passwordLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,18 @@ public class MainActivity extends AppCompatActivity {
 
         emailEdit = findViewById(R.id.email_login_edit);
         passwordEdit = findViewById(R.id.password_login_edit);
+        emailLayout = findViewById(R.id.email_login_layout);
+        passwordLayout = findViewById(R.id.password_login_layout);
+        textView = findViewById(R.id.name_login_textview);
+        loginButton = findViewById(R.id.login_login_button);
+        signUpButton = findViewById(R.id.signup_login_button);
+
+        Fonts.setTypeFace(getApplicationContext(), Constants.FONT_COURIER_PRIME, Constants.FONT_STYLE_REGULAR,
+                emailEdit, passwordEdit,emailLayout, passwordLayout);
+
+        Fonts.setTypeFace(getApplicationContext(), Constants.FONT_COURIER_PRIME, Constants.FONT_STYLE_BOLD,
+                textView, loginButton, signUpButton);
+
 
         emailEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

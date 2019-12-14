@@ -14,5 +14,10 @@ public final class Constants {
     public static final String USER_COLUMN_NOTIFY = "__notify";
     public static final String USER_COLUMN_TIME = "__time";
     public static final String USER_COLUMN_THEME = "__theme";
+    public static final int FONT_COURIER_PRIME = 1;
+    public static final int FONT_STYLE_REGULAR = 0;
+    public static final int FONT_STYLE_ITALIC = 1;
+    public static final int FONT_STYLE_BOLD = 2;
+    public static final int FONT_STYLE_BOLD_ITALIC = 3;
 
 }

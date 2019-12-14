@@ -3,7 +3,8 @@ package com.renatoawk.diary;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -12,7 +13,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.renatoawk.diary.gui.NotesActivity;
-import com.renatoawk.diary.gui.ProgressBarDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,13 +30,20 @@ public class Volley {
             @Override
             public void onResponse(String response) {
                 try {
+                    progressBarDialog.closeDialog();
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.has(Constants.STATUS)){
                         if (jsonObject.get(Constants.STATUS).equals(Constants.INTERNAL_SERVER_ERROR)){
-                            progressBarDialog.closeDialog();
-                            Toast.makeText(context, "Request error",Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(context)
+                                    .setMessage(context.getString(R.string.request_error))
+                                    .setPositiveButton(context.getString(R.string.OK), null)
+                                    .show();
+
                         } else if (jsonObject.get(Constants.STATUS).equals(Constants.NOT_ACCETABLE)){
-                            Toast.makeText(context, "Unknown error",Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(context)
+                                    .setMessage(context.getString(R.string.unknown_error))
+                                    .setPositiveButton(context.getString(R.string.OK), null)
+                                    .show();
                         } else if (jsonObject.get(Constants.STATUS).equals(Constants.OK)){
                             User user = new User();
                             user.setName(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(0));
@@ -46,7 +53,6 @@ public class Volley {
                             user.setTime(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(0));
                             user.setTheme(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(0));
                             Session.user = user;
-                            progressBarDialog.closeDialog();
                             ((Activity) context).finish();
                             Intent notesAcitivity = new Intent(context, NotesActivity.class);
                             context.startActivity(notesAcitivity);
@@ -54,14 +60,17 @@ public class Volley {
                         }
 
                     } else {
-                        progressBarDialog.closeDialog();
-                        Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
+                        new AlertDialog.Builder(context)
+                                .setMessage(context.getString(R.string.error))
+                                .setPositiveButton(context.getString(R.string.OK), null)
+                                .show();
                     }
 
                 } catch (JSONException e) {
-                    progressBarDialog.closeDialog();
-                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-
+                    new AlertDialog.Builder(context)
+                            .setMessage(context.getString(R.string.connection_error))
+                            .setPositiveButton(context.getString(R.string.OK), null)
+                            .show();
                 }
             }
 
@@ -71,8 +80,11 @@ public class Volley {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.getMessage(),Toast.LENGTH_LONG).show();
                 progressBarDialog.closeDialog();
+                new AlertDialog.Builder(context)
+                        .setMessage(context.getString(R.string.error))
+                        .setPositiveButton(context.getString(R.string.OK), null)
+                        .show();
 
             }
         };
@@ -98,32 +110,42 @@ public class Volley {
             @Override
             public void onResponse(String response) {
                 try {
+                    progressBarDialog.closeDialog();
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.has(Constants.STATUS)){
                         if (jsonObject.get(Constants.STATUS).equals(Constants.INTERNAL_SERVER_ERROR)) {
-                            progressBarDialog.closeDialog();
-                            Toast.makeText(context, "Request error", Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(context)
+                                    .setMessage(context.getString(R.string.request_error))
+                                    .setPositiveButton(context.getString(R.string.OK), null)
+                                    .show();
                         } else if (jsonObject.get(Constants.STATUS).equals(Constants.NOT_ACCETABLE)){
-                            progressBarDialog.closeDialog();
-                            Toast.makeText(context, "Unknown error", Toast.LENGTH_SHORT).show();
+                            new AlertDialog.Builder(context)
+                                    .setMessage(context.getString(R.string.unknown_error))
+                                    .setPositiveButton(context.getString(R.string.OK), null)
+                                    .show();
                         } else if (jsonObject.get(Constants.STATUS).equals(Constants.CREATED)){
                             progressBarDialog.closeDialog();
                             Session.user = user;
                             ((Activity) context).finish();
                         } else {
-                            Toast.makeText(context, "Error",Toast.LENGTH_SHORT).show();
-
+                            new AlertDialog.Builder(context)
+                                    .setMessage(context.getString(R.string.error))
+                                    .setPositiveButton(context.getString(R.string.OK), null)
+                                    .show();
                         }
 
                     } else {
-                        progressBarDialog.closeDialog();
-                        Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
+                        new AlertDialog.Builder(context)
+                                .setMessage(context.getString(R.string.error))
+                                .setPositiveButton(context.getString(R.string.OK), null)
+                                .show();
                     }
 
                 } catch (JSONException e) {
-                    progressBarDialog.closeDialog();
-                    Toast.makeText(context, "Connection error", Toast.LENGTH_LONG).show();
-
+                    new AlertDialog.Builder(context)
+                            .setMessage(context.getString(R.string.connection_error))
+                            .setPositiveButton(context.getString(R.string.OK), null)
+                            .show();
                 }
             }
 
@@ -133,7 +155,10 @@ public class Volley {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressBarDialog.closeDialog();
-                Toast.makeText(context, error.getMessage(),Toast.LENGTH_LONG).show();
+                new AlertDialog.Builder(context)
+                        .setMessage(context.getString(R.string.error))
+                        .setPositiveButton(context.getString(R.string.OK), null)
+                        .show();
             }
         };
 

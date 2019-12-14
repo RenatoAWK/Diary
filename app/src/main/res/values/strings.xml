@@ -10,4 +10,10 @@
     <string name="cancel">Cancelar</string>
     <string name="create_an_account">Crie uma conta</string>
     <string name="password_different">Senhas diferentes</string>
+    <string name="OK">OK</string>
+    <string name="loading">Carregando</string>
+    <string name="request_error">Houve um erro na requisição</string>
+    <string name="unknown_error">Erro desconhecido</string>
+    <string name="error">Erro</string>
+    <string name="connection_error">Erro na conexão</string>
 </resources>

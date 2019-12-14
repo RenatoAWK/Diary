@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.renatoawk.diary.Constants;
+import com.renatoawk.diary.Encryption;
 import com.renatoawk.diary.Fonts;
 import com.renatoawk.diary.R;
 import com.renatoawk.diary.Session;
@@ -86,8 +87,8 @@ public class MainActivity extends AppCompatActivity {
         boolean passwordValid = Validation.isPasswordValid(passwordEdit, getApplicationContext());
         if (emailValid & passwordValid){
             Map<String, String> map = new HashMap<>();
-            map.put("email",emailEdit.getText().toString().trim());
-            map.put("password",passwordEdit.getText().toString());
+            map.put(Constants.USER_ATTRIBUTE_EMAIL, emailEdit.getText().toString().trim());
+            map.put(Constants.USER_ATTRIBUTE_PASSWORD, Encryption.encrypt(passwordEdit.getText().toString()));
             User user = new User(passwordEdit.getText().toString(), emailEdit.getText().toString().trim());
             Volley.requestLogin(MainActivity.this, map, user);
         }

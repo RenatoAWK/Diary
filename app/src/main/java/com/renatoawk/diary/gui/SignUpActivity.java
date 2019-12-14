@@ -12,6 +12,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.renatoawk.diary.Constants;
+import com.renatoawk.diary.Encryption;
 import com.renatoawk.diary.Fonts;
 import com.renatoawk.diary.R;
 import com.renatoawk.diary.User;
@@ -92,9 +93,8 @@ public class SignUpActivity extends AppCompatActivity {
         boolean passwordsEqual = Validation.isPasswordsEqual(passwordEdit, confirmPasswordEdit, getApplicationContext());
         if (emailValid && passwordValid && confirmationPasswordValid && passwordsEqual){
             Map<String, String> map = new HashMap<>();
-            map.put("email",emailEdit.getText().toString().trim());
-            map.put("password",passwordEdit.getText().toString());
-            map.put("type","signup");
+            map.put(Constants.USER_ATTRIBUTE_EMAIL ,emailEdit.getText().toString().trim());
+            map.put(Constants.USER_ATTRIBUTE_PASSWORD, Encryption.encrypt(passwordEdit.getText().toString()));
             User user = new User(passwordEdit.getText().toString(), emailEdit.getText().toString().trim());
             Volley.requestSignUp(SignUpActivity.this, map, user);
 

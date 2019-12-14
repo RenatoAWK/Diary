@@ -19,5 +19,7 @@ public final class Constants {
     public static final int FONT_STYLE_ITALIC = 1;
     public static final int FONT_STYLE_BOLD = 2;
     public static final int FONT_STYLE_BOLD_ITALIC = 3;
+    public static final String USER_ATTRIBUTE_EMAIL = "email";
+    public static final String USER_ATTRIBUTE_PASSWORD = "password";
 
 }

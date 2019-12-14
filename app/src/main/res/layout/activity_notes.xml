@@ -1,18 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        style="@style/ScrollView"
-        tools:context=".gui.NotesActivity">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            style="@style/LinearLayoutVertical30"
+            android:paddingBottom="60dp">
 
 
+        </LinearLayout>
 
     </ScrollView>
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom">
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/app_bar"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/colorPrimary"
+            app:fabAlignmentMode="center"
+            app:navigationIcon="@drawable/ic_menu_black_24dp"
+            app:menu="@menu/bottom_app_bar"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_black_24dp"
+            app:layout_anchor="@id/app_bar"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-</FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

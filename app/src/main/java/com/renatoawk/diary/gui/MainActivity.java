@@ -32,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null){actionBar.hide();}
-
         emailEdit = findViewById(R.id.email_login_edit);
         passwordEdit = findViewById(R.id.password_login_edit);
         emailLayout = findViewById(R.id.email_login_layout);

@@ -35,7 +35,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/TextInputLayoutFilledBox"
-            android:id="@+id/password_login_layout">
+            android:id="@+id/password_login_layout"
+            app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_login_edit"

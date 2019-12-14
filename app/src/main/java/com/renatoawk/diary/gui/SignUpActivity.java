@@ -44,13 +44,12 @@ public class SignUpActivity extends AppCompatActivity {
         confirmPasswordLayout = findViewById(R.id.password_confirmation_sign_up_layout);
         textView = findViewById(R.id.title_sign_up_textview);
         signupButton = findViewById(R.id.sign_up_sign_up_button);
-        cancelButton = findViewById(R.id.cancel_sign_up_button);
 
         Fonts.setTypeFace(getApplicationContext(), Constants.FONT_COURIER_PRIME, Constants.FONT_STYLE_REGULAR,
                 emailEdit, passwordEdit, confirmPasswordEdit, emailLayout, passwordLayout, confirmPasswordLayout);
 
         Fonts.setTypeFace(getApplicationContext(), Constants.FONT_COURIER_PRIME, Constants.FONT_STYLE_BOLD,
-                textView, signupButton, cancelButton);
+                textView, signupButton);
 
         emailEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -101,7 +100,4 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    public void cancel(View view) {
-        finish();
-    }
 }

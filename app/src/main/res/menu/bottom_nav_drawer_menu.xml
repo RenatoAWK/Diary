@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/theme"
+            android:icon="@drawable/ic_label_outline_black_24dp"
+            android:title="@string/theme_settings" />
+        <item
+            android:id="@+id/font"
+            android:icon="@drawable/ic_label_outline_black_24dp"
+            android:title="@string/font_settings" />
+        <item
+            android:id="@+id/notify"
+            android:icon="@drawable/ic_label_outline_black_24dp"
+            android:title="@string/notification_settings" />
+    </group>
+
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/ic_help_outline_black_24dp"
+            android:title="@string/about" />
+    </group>
+</menu>

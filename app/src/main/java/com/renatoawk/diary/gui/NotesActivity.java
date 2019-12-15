@@ -12,6 +12,7 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
+import com.renatoawk.diary.BottomNavigationDrawerFragment;
 import com.renatoawk.diary.R;
 
 public class NotesActivity extends AppCompatActivity {
@@ -24,7 +25,13 @@ public class NotesActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.app_bar_settings){
+        if (item.getItemId() == 16908332){
+            BottomNavigationDrawerFragment bottomNavigationDrawerFragment = new BottomNavigationDrawerFragment(this);
+            bottomNavigationDrawerFragment.show(getSupportFragmentManager(), bottomNavigationDrawerFragment.getTag());
+
+
+
+        } else if (item.getItemId() == R.id.app_bar_settings){
             Toast.makeText(this, "Pegou o clique no settings", Toast.LENGTH_SHORT).show();
         }
         return true;

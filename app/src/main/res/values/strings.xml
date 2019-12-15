@@ -18,4 +18,8 @@
     <string name="connection_error">Erro na conexão</string>
     <string name="search">Pesquisar</string>
     <string name="settings">Configurações</string>
+    <string name="theme_settings">Configurar Tema</string>
+    <string name="font_settings">Configurar Fonte</string>
+    <string name="notification_settings">Configurar Notificação</string>
+    <string name="about">Sobre</string>
 </resources>

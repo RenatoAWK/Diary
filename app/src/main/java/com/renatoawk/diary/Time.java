@@ -1,50 +1,78 @@
 package com.renatoawk.diary;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 public class Time {
-    private Integer hour, minute, secound;
+    public Calendar calendar = Calendar.getInstance(Locale.getDefault());
+
+    public void setHour(Integer value){this.calendar.set(Calendar.HOUR, value);}
+    public void setMinute(Integer value){this.calendar.set(Calendar.MINUTE, value);}
+    public void setSecound(Integer value){this.calendar.set(Calendar.SECOND, value);}
+    public void setYear(Integer value){this.calendar.set(Calendar.YEAR, value);}
+    public void setMonth(Integer value){this.calendar.set(Calendar.MONTH, value);}
+    public void setDayOfMonth(Integer value){this.calendar.set(Calendar.DAY_OF_MONTH, value);}
+
+    public Integer getHour(){return this.calendar.get(Calendar.HOUR_OF_DAY);}
+    public Integer getMinute(){ return this.calendar.get(Calendar.MINUTE);}
+    public Integer getSecound(){return this.calendar.get(Calendar.SECOND);}
+    public Integer getYear(){return this.calendar.get(Calendar.YEAR);}
+    public Integer getMonth(){return this.calendar.get(Calendar.MONTH);}
+    public Integer getDayOfMonth(){return this.calendar.get(Calendar.DAY_OF_MONTH);}
 
     public Time(Integer hour, Integer minute, Integer secound) {
-        this.hour = hour;
-        this.minute = minute;
-        this.secound = secound;
+        this.setHour(hour);
+        this.setMinute(minute);
+        this.setSecound(secound);
     }
 
-    public Time(String value){
-        setFormated(value);
+    public Time(Integer dayOfMonth, Integer month, Integer year, Integer hour, Integer minute, Integer secound) {
+        this.setHour(hour);
+        this.setMinute(minute);
+        this.setSecound(secound);
+        this.setYear(year);
+        this.setMonth(month);
+        this.setDayOfMonth(dayOfMonth);
     }
 
-    private void setFormated(String value) {
+    public Time(Calendar calendar){
+        this.calendar = calendar;
+    }
+
+    public Time(){}
+
+    public void setFormatedTime(String value) {
         String[]valueS = value.split(":");
-        this.hour = Integer.parseInt(valueS[0]);
-        this.minute = Integer.parseInt(valueS[1]);
-        this.secound = Integer.parseInt(valueS[2]);
+        this.setHour(Integer.parseInt(valueS[0]));
+        this.setMinute(Integer.parseInt(valueS[1]));
+        this.setSecound(Integer.parseInt(valueS[2]));
     }
 
-    public Integer getHour() {
-        return hour;
+
+    public String getFormatedTime(){
+        return this.getHour() +":"+
+                this.getMinute() +":"+
+                this.getSecound();
     }
 
-    public void setHour(Integer hour) {
-        this.hour = hour;
+    public String getFormatedDate(){
+        return this.getDayOfMonth() +"/"+
+                this.getMonth() +"/"+
+                this.getYear();
     }
 
-    public Integer getMinute() {
-        return minute;
+    public String getTimePostgres(){
+        return getFormatedTime();
     }
 
-    public void setMinute(Integer minute) {
-        this.minute = minute;
+    public String getFormatedDateTime(){
+        return getFormatedDate()+" "+getFormatedTime();
     }
 
-    public Integer getSecound() {
-        return secound;
-    }
+    public String getTimeStampPostgres(){
+        return this.getYear() +"-"+
+                this.getMonth() +"-"+
+                this.getDayOfMonth()+" "+ getFormatedTime();
 
-    public void setSecound(Integer secound) {
-        this.secound = secound;
-    }
-
-    public String getFormated(){
-        return this.hour +":"+ this.minute +":"+ this.secound;
     }
 }

@@ -85,13 +85,11 @@ public class User {
         this.theme = theme;
     }
 
-    public void setHour(String value) {
-        this.time = new Time(value);
+    public void setTime(String value) {
+        this.time = new Time();
+        this.time.setFormatedTime(value);
     }
 
-    public void setHour(Time time){
-        this.time = time;
-    }
 
     public void setName(JSONObject jsonObject) throws JSONException {
         if (!jsonObject.isNull(Constants.USER_COLUMN_NAME)){
@@ -125,7 +123,7 @@ public class User {
 
     public void setTime(JSONObject jsonObject) throws JSONException {
         if (!jsonObject.isNull(Constants.USER_COLUMN_TIME)){
-            this.setHour(jsonObject.getString(Constants.USER_COLUMN_TIME));
+            this.setTime(jsonObject.getString(Constants.USER_COLUMN_TIME));
         }
     }
 

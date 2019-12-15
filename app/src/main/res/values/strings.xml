@@ -22,4 +22,7 @@
     <string name="font_settings">Configurar Fonte</string>
     <string name="notification_settings">Configurar Notificação</string>
     <string name="about">Sobre</string>
+    <string name="add">Adicionar</string>
+    <string name="day">Dia</string>
+    <string name="hour">Hora</string>
 </resources>

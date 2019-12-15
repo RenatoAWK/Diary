@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/cancel_note"
+        android:icon="@drawable/ic_cancel_black_24dp"
+        app:showAsAction="ifRoom"
+        android:title="@string/cancel">
+    </item>
+
+    <item
+        android:id="@+id/calendar_note"
+        android:icon="@drawable/ic_date_range_black_24dp"
+        app:showAsAction="always"
+        android:title="@string/day">
+    </item>
+
+    <item
+        android:id="@+id/time_note"
+        android:icon="@drawable/ic_access_time_black_24dp"
+        app:showAsAction="always"
+        android:title="@string/hour">
+    </item>
+
+    <item
+        android:id="@+id/add_note"
+        android:icon="@drawable/ic_done_black_24dp"
+        app:showAsAction="always"
+        android:title="@string/add">
+    </item>
+
+</menu>

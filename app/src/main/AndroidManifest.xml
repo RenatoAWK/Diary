@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".gui.NoteActivity"></activity>
-        <activity android:name=".gui.NotesActivity" />
+        <activity android:name=".gui.NotesActivity"
+            android:configChanges="orientation|screenSize"/>
         <activity android:name=".gui.SignUpActivity" />
         <activity android:name=".gui.MainActivity">
             <intent-filter>

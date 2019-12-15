@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.google.android.material.textfield.TextInputLayout;
 
 public class Fonts {
@@ -30,6 +32,21 @@ public class Fonts {
                 }
             } else if (style == Constants.FONT_STYLE_BOLD_ITALIC){
                 typeface = Typeface.createFromAsset(context.getAssets(), "fonts/CourierPrime-BoldItalic.ttf");
+                for (Object object : objects) {
+                    set(typeface, object);
+
+                }
+            }
+
+        } else if (font == Constants.FONT_ROBOTO){
+            if (style == Constants.FONT_STYLE_LIGHT){
+                typeface = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Light.ttf");
+                for (Object object : objects) {
+                    set(typeface, object);
+
+                }
+            } else if (style == Constants.FONT_STYLE_MEDIUM){
+                typeface = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Medium.ttf");
                 for (Object object : objects) {
                     set(typeface, object);
 

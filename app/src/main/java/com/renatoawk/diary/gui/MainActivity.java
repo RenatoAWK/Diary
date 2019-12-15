@@ -39,10 +39,8 @@ public class MainActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.login_login_button);
         signUpButton = findViewById(R.id.signup_login_button);
 
-        Fonts.setTypeFace(getApplicationContext(), Constants.FONT_COURIER_PRIME, Constants.FONT_STYLE_REGULAR,
-                emailEdit, passwordEdit,emailLayout, passwordLayout);
 
-        Fonts.setTypeFace(getApplicationContext(), Constants.FONT_COURIER_PRIME, Constants.FONT_STYLE_BOLD,
+        Fonts.setTypeFace(getApplicationContext(), Constants.FONT_ROBOTO, Constants.FONT_STYLE_MEDIUM,
                 textView, loginButton, signUpButton);
 
 

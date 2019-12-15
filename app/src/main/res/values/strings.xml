@@ -8,7 +8,7 @@
     <string name="password">Senha</string>
     <string name="confirm_password">Confirmar senha</string>
     <string name="cancel">Cancelar</string>
-    <string name="create_an_account">Crie uma conta</string>
+    <string name="create_an_account">Crie uma conta!</string>
     <string name="password_different">Senhas diferentes</string>
     <string name="OK">OK</string>
     <string name="loading">Carregando</string>

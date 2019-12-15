@@ -40,10 +40,7 @@ public class SignUpActivity extends AppCompatActivity {
         textView = findViewById(R.id.title_sign_up_textview);
         signupButton = findViewById(R.id.sign_up_sign_up_button);
 
-        Fonts.setTypeFace(getApplicationContext(), Constants.FONT_COURIER_PRIME, Constants.FONT_STYLE_REGULAR,
-                emailEdit, passwordEdit, confirmPasswordEdit, emailLayout, passwordLayout, confirmPasswordLayout);
-
-        Fonts.setTypeFace(getApplicationContext(), Constants.FONT_COURIER_PRIME, Constants.FONT_STYLE_BOLD,
+        Fonts.setTypeFace(getApplicationContext(), Constants.FONT_ROBOTO, Constants.FONT_STYLE_MEDIUM,
                 textView, signupButton);
 
         emailEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {

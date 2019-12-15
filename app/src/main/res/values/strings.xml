@@ -25,4 +25,5 @@
     <string name="add">Adicionar</string>
     <string name="day">Dia</string>
     <string name="hour">Hora</string>
+    <string name="touch_here_to_start_to_write">Toque aqui para começar a escrever...</string>
 </resources>

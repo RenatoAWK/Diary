@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import java.util.Calendar;
 public class NoteActivity extends AppCompatActivity {
     private Time time = new Time();
     private Toolbar toolbar;
+    private EditText editText;
 
 
     @Override
@@ -29,7 +31,9 @@ public class NoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 
+        editText = findViewById(R.id.text_note);
         setUpToolbar();
+        editText.requestFocus();
 
     }
 

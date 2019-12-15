@@ -49,6 +49,7 @@ public class Validation {
           if ( passwordValid && confirmationpasswordValid){
               passwordLayout.setError(null);
               confirmPasswordLayout.setError(null);
+              
               return true;
           }
           return false;

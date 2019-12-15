@@ -24,7 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
     private TextInputEditText emailEdit, passwordEdit, confirmPasswordEdit;
     private AppCompatTextView textView;
     private TextInputLayout emailLayout, passwordLayout, confirmPasswordLayout;
-    private MaterialButton signupButton, cancelButton;
+    private MaterialButton signupButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +51,9 @@ public class SignUpActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus){
                     if (Validation.isEmailValid(emailEdit.getText().toString())){
-                        emailEdit.setError(null);
+                        emailLayout.setError(null);
                     } else {
-                        emailEdit.setError(getText(R.string.invalid_email));
+                        emailLayout.setError(getText(R.string.invalid_email));
                     }
                 }
             }
@@ -63,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus){
-                    passwordEdit.setError(null);
+                    passwordLayout.setError(null);
                 }
             }
         });
@@ -72,7 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus){
-                    confirmPasswordEdit.setError(null);
+                    confirmPasswordLayout.setError(null);
                 }
             }
         });
@@ -81,10 +81,10 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void signUp(View view) {
-        boolean emailValid = Validation.isEmailValid(emailEdit, getApplicationContext());
-        boolean passwordValid = Validation.isPasswordValid(passwordEdit, getApplicationContext());
-        boolean confirmationPasswordValid = Validation.isPasswordValid(confirmPasswordEdit, getApplicationContext());
-        boolean passwordsEqual = Validation.isPasswordsEqual(passwordEdit, confirmPasswordEdit, getApplicationContext());
+        boolean emailValid = Validation.isEmailValid(emailEdit, emailLayout, getApplicationContext());
+        boolean passwordValid = Validation.isPasswordValid(passwordEdit, passwordLayout, getApplicationContext());
+        boolean confirmationPasswordValid = Validation.isPasswordValid(confirmPasswordEdit, confirmPasswordLayout,  getApplicationContext());
+        boolean passwordsEqual = Validation.isPasswordsEqual(passwordEdit, passwordLayout, confirmPasswordEdit, confirmPasswordLayout, getApplicationContext());
         if (emailValid && passwordValid && confirmationPasswordValid && passwordsEqual){
             Map<String, String> map = new HashMap<>();
             map.put(Constants.USER_ATTRIBUTE_EMAIL ,emailEdit.getText().toString().trim());

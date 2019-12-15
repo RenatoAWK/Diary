@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus){
                     if (Validation.isEmailValid(emailEdit.getText().toString())){
-                        emailEdit.setError(null);
+                        emailLayout.setError(null);
                     } else {
-                        emailEdit.setError(getText(R.string.invalid_email));
+                        emailLayout.setError(getText(R.string.invalid_email));
                     }
                 }
             }
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus){
-                    passwordEdit.setError(null);
+                    passwordLayout.setError(null);
                 }
             }
         });
@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(View view) {
-        boolean emailValid = Validation.isEmailValid(emailEdit, getApplicationContext());
-        boolean passwordValid = Validation.isPasswordValid(passwordEdit, getApplicationContext());
+        boolean emailValid = Validation.isEmailValid(emailEdit, emailLayout, getApplicationContext());
+        boolean passwordValid = Validation.isPasswordValid(passwordEdit, passwordLayout, getApplicationContext());
         if (emailValid & passwordValid){
             Map<String, String> map = new HashMap<>();
             map.put(Constants.USER_ATTRIBUTE_EMAIL, emailEdit.getText().toString().trim());

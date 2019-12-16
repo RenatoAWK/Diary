@@ -1,12 +1,11 @@
-package com.renatoawk.diary;
+package com.renatoawk.diary.util;
 
 import android.content.Context;
 import android.graphics.Typeface;
 import android.widget.TextView;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import com.google.android.material.textfield.TextInputLayout;
+import com.renatoawk.diary.util.Constants;
 
 public class Fonts {
 

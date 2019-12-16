@@ -1,4 +1,4 @@
-package com.renatoawk.diary;
+package com.renatoawk.diary.util;
 
 import java.util.Calendar;
 import java.util.Locale;

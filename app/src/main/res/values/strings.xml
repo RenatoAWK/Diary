@@ -26,4 +26,5 @@
     <string name="day">Dia</string>
     <string name="hour">Hora</string>
     <string name="touch_here_to_start_to_write">Toque aqui para começar a escrever...</string>
+    <string name="password_must_be_32_characters_or_less">A senha deve ter no máximo 32 caracteres</string>
 </resources>

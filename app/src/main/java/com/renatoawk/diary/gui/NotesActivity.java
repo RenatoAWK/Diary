@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.renatoawk.diary.BottomNavigationDrawerFragment;
 import com.renatoawk.diary.R;
 
 public class NotesActivity extends AppCompatActivity {

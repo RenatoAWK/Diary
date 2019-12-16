@@ -15,10 +15,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.renatoawk.diary.R;
-import com.renatoawk.diary.Time;
-
-import java.text.DateFormat;
-import java.util.Calendar;
+import com.renatoawk.diary.util.Time;
 
 public class NoteActivity extends AppCompatActivity {
     private Time time = new Time();

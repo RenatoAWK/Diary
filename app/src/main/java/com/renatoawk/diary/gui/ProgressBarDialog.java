@@ -1,4 +1,4 @@
-package com.renatoawk.diary;
+package com.renatoawk.diary.gui;
 
 import android.app.Dialog;
 import android.content.Context;

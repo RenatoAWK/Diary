@@ -1,4 +1,4 @@
-package com.renatoawk.diary;
+package com.renatoawk.diary.gui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.renatoawk.diary.R;
 
 public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
     private Context context;

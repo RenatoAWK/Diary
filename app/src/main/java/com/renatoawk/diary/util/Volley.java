@@ -1,4 +1,4 @@
-package com.renatoawk.diary;
+package com.renatoawk.diary.util;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,7 +12,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.renatoawk.diary.Constants_url;
+import com.renatoawk.diary.R;
 import com.renatoawk.diary.gui.NotesActivity;
+import com.renatoawk.diary.gui.ProgressBarDialog;
+import com.renatoawk.diary.model.Session;
+import com.renatoawk.diary.model.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,6 +57,7 @@ public class Volley {
                             user.setNotify(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(0));
                             user.setTime(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(0));
                             user.setTheme(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(0));
+                            user.setPassword(map.get(Constants.USER_ATTRIBUTE_PASSWORD));
                             Session.user = user;
                             ((Activity) context).finish();
                             Intent notesAcitivity = new Intent(context, NotesActivity.class);

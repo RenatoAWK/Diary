@@ -8,14 +8,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.renatoawk.diary.Constants;
-import com.renatoawk.diary.Encryption;
-import com.renatoawk.diary.Fonts;
+import com.renatoawk.diary.util.Constants;
+import com.renatoawk.diary.encryption.MD5;
+import com.renatoawk.diary.util.Fonts;
 import com.renatoawk.diary.R;
-import com.renatoawk.diary.Session;
-import com.renatoawk.diary.User;
-import com.renatoawk.diary.Validation;
-import com.renatoawk.diary.Volley;
+import com.renatoawk.diary.model.Session;
+import com.renatoawk.diary.model.User;
+import com.renatoawk.diary.util.Validation;
+import com.renatoawk.diary.util.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         if (emailValid & passwordValid){
             Map<String, String> map = new HashMap<>();
             map.put(Constants.USER_ATTRIBUTE_EMAIL, emailEdit.getText().toString().trim());
-            map.put(Constants.USER_ATTRIBUTE_PASSWORD, Encryption.encrypt(passwordEdit.getText().toString()));
+            map.put(Constants.USER_ATTRIBUTE_PASSWORD, MD5.encrypt(passwordEdit.getText().toString()));
             User user = new User(passwordEdit.getText().toString(), emailEdit.getText().toString().trim());
             Volley.requestLogin(MainActivity.this, map, user);
         }

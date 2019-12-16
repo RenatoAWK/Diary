@@ -1,4 +1,7 @@
-package com.renatoawk.diary;
+package com.renatoawk.diary.model;
+
+import com.renatoawk.diary.util.Constants;
+import com.renatoawk.diary.util.Time;
 
 import org.json.JSONException;
 import org.json.JSONObject;

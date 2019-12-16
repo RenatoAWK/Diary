@@ -1,6 +1,7 @@
-package com.renatoawk.diary;
+package com.renatoawk.diary.util;
 
 public final class Constants {
+    public static final String AES = "AES";
     public static final String STATUS = "status";
     public static final int OK = 200;
     public static final int CREATED = 201;

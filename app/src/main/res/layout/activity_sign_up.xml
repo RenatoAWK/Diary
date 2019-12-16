@@ -27,7 +27,11 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/TextInputLayoutFilledBox"
             app:endIconMode="password_toggle"
-            android:id="@+id/password_sign_up_layout">
+            android:id="@+id/password_sign_up_layout"
+            app:counterMaxLength="32"
+            app:counterEnabled="true"
+            app:helperText="@string/password_must_be_32_characters_or_less"
+            app:helperTextEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_sign_up_edit"
@@ -40,7 +44,11 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/TextInputLayoutFilledBox"
             android:id="@+id/password_confirmation_sign_up_layout"
-            app:endIconMode="password_toggle">
+            app:endIconMode="password_toggle"
+            app:counterMaxLength="32"
+            app:counterEnabled="true"
+            app:helperText="@string/password_must_be_32_characters_or_less"
+            app:helperTextEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_confirmation_sign_up_edit"

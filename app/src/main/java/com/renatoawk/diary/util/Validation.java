@@ -1,10 +1,11 @@
-package com.renatoawk.diary;
+package com.renatoawk.diary.util;
 
 import android.content.Context;
 import android.util.Patterns;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.renatoawk.diary.R;
 
 public class Validation {
     public static boolean isEmailValid(String text) {
@@ -35,6 +36,9 @@ public class Validation {
         if (isBlank(textInputEditText.getText().toString())){
             textInputLayout.setError(context.getString(R.string.empty_field));
             return false;
+        } else if (textInputEditText.getText().toString().length() > 32){
+            textInputLayout.setError(context.getString(R.string.password_must_be_32_characters_or_less));
+            return false;
         }
         textInputLayout.setError(null);
         return true;
@@ -45,8 +49,8 @@ public class Validation {
                                            Context context) {
         if(passwordEdit.getText().toString().equals(confirmPasswordEdit.getText().toString())){
           boolean passwordValid = isPasswordValid(passwordEdit, passwordLayout, context);
-          boolean confirmationpasswordValid = isPasswordValid(confirmPasswordEdit, confirmPasswordLayout, context);
-          if ( passwordValid && confirmationpasswordValid){
+          boolean confirmationPasswordValid = isPasswordValid(confirmPasswordEdit, confirmPasswordLayout, context);
+          if ( passwordValid && confirmationPasswordValid){
               passwordLayout.setError(null);
               confirmPasswordLayout.setError(null);
               

@@ -1,9 +1,9 @@
-package com.renatoawk.diary;
+package com.renatoawk.diary.encryption;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Encryption {
+public class MD5 {
 
     private static MessageDigest md = null;
 

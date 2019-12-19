@@ -1,6 +1,7 @@
 package com.renatoawk.diary.gui;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -15,7 +16,14 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.renatoawk.diary.R;
+import com.renatoawk.diary.model.Session;
+import com.renatoawk.diary.util.Constants;
 import com.renatoawk.diary.util.Time;
+import com.renatoawk.diary.util.Validation;
+import com.renatoawk.diary.util.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class NoteActivity extends AppCompatActivity {
     private Time time = new Time();
@@ -83,7 +91,22 @@ public class NoteActivity extends AppCompatActivity {
 
 
         } else if (item.getItemId() == R.id.add_note){
-            Toast.makeText(this, "Enviar..", Toast.LENGTH_SHORT).show();
+            if (Validation.isBlank(editText.getText().toString())){
+                new AlertDialog.Builder(getApplicationContext())
+                        .setMessage(getString(R.string.empty_field))
+                        .setPositiveButton(getString(R.string.OK), null)
+                        .show();
+            } else {
+                Map<String, String> map = new HashMap<>();
+                map.put(Constants.NOTE_ATTRIBUTE_ID_USER, String.valueOf(Session.user.getId()));
+                map.put(Constants.NOTE_ATTRIBUTE_TEXT, editText.getText().toString());
+                map.put(Constants.NOTE_ATTRIBUTE_EMOTION, "0");
+                map.put(Constants.NOTE_ATTRIBUTE_CREATED, time.getTimeStampPostgres());
+                map.put(Constants.NOTE_ATTRIBUTE_EDITED, time.getTimeStampPostgres());
+                Volley.requestInsertNote(NoteActivity.this, map);
+
+
+            }
         }
 
         return true;

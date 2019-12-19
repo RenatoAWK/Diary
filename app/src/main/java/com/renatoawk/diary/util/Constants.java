@@ -25,5 +25,10 @@ public final class Constants {
     public static final int FONT_STYLE_MEDIUM = 5;
     public static final String USER_ATTRIBUTE_EMAIL = "email";
     public static final String USER_ATTRIBUTE_PASSWORD = "password";
+    public static final String NOTE_ATTRIBUTE_ID_USER = "id_user";
+    public static final String NOTE_ATTRIBUTE_TEXT = "text";
+    public static final String NOTE_ATTRIBUTE_EMOTION = "emotion";
+    public static final String NOTE_ATTRIBUTE_CREATED = "created";
+    public static final String NOTE_ATTRIBUTE_EDITED = "edited";
 
 }

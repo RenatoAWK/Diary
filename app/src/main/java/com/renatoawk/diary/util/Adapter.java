@@ -19,7 +19,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private ArrayList<Note> data;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView textView;
+        private TextView title;
+        private TextView text;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -31,11 +32,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 }
             });
 
-            textView = itemView.findViewById(R.id.title_recycler_item);
-        }
-
-        public TextView getTextView(){
-            return textView;
+            title = itemView.findViewById(R.id.title_recycler_item);
+            text = itemView.findViewById(R.id.text_recycler_item);
         }
     }
 
@@ -53,7 +51,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.getTextView().setText( this.data.get(position).getEdited().getFormatedDate());
+        holder.title.setText(this.data.get(position).getEdited().getFormatedDate());
+        holder.text.setText(this.data.get(position).getText());
 
     }
 

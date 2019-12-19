@@ -16,6 +16,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.renatoawk.diary.R;
+import com.renatoawk.diary.model.Note;
 import com.renatoawk.diary.model.Session;
 import com.renatoawk.diary.util.Constants;
 import com.renatoawk.diary.util.Time;
@@ -104,6 +105,11 @@ public class NoteActivity extends AppCompatActivity {
                 map.put(Constants.NOTE_ATTRIBUTE_CREATED, time.getTimeStampPostgres());
                 map.put(Constants.NOTE_ATTRIBUTE_EDITED, time.getTimeStampPostgres());
                 Volley.requestInsertNote(NoteActivity.this, map);
+
+                //teste
+
+                Session.user.getNotes().add(new Note(0,editText.getText().toString(),
+                        0, time, time));
 
 
             }

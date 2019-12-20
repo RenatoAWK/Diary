@@ -9,14 +9,27 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.VolleyError;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.renatoawk.diary.R;
+import com.renatoawk.diary.model.Note;
+import com.renatoawk.diary.model.Session;
+import com.renatoawk.diary.util.Adapter;
+import com.renatoawk.diary.util.Time;
+import com.renatoawk.diary.util.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class NotesActivity extends AppCompatActivity {
     private BottomAppBar bottomAppBar;
     private FloatingActionButton fab;
+    private RecyclerView recyclerView;
+    private Adapter adapter;
 
 
     @Override
@@ -57,10 +70,17 @@ public class NotesActivity extends AppCompatActivity {
                 startActivity(noteActivity);
             }
         });
+    }
 
-
-
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        String url_query = "?id_user="+ Session.user.getId();
+        adapter = new Adapter(Session.user.getNotes(), getApplicationContext());
+        recyclerView = findViewById(R.id.recycler_notes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setAdapter(adapter);
+        Volley.requestNotes(NotesActivity.this, url_query, adapter);
 
 
     }

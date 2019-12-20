@@ -6,6 +6,8 @@ import com.renatoawk.diary.util.Time;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class User {
     private String name;
     private String password;
@@ -14,6 +16,7 @@ public class User {
     private boolean notify;
     private Time time;
     private Integer theme;
+    private ArrayList<Note> notes = new ArrayList<>();
 
     public User(){}
 
@@ -134,5 +137,13 @@ public class User {
         if (!jsonObject.isNull(Constants.USER_COLUMN_THEME)){
             this.setTheme(jsonObject.getInt(Constants.USER_COLUMN_THEME));
         }
+    }
+
+    public ArrayList<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(ArrayList<Note> notes) {
+        this.notes = notes;
     }
 }

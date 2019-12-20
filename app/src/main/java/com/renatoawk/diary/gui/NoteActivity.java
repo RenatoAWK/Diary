@@ -16,6 +16,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.renatoawk.diary.R;
+import com.renatoawk.diary.model.Note;
 import com.renatoawk.diary.model.Session;
 import com.renatoawk.diary.util.Constants;
 import com.renatoawk.diary.util.Time;
@@ -71,7 +72,7 @@ public class NoteActivity extends AppCompatActivity {
                 }
             },
                     time.getYear(),
-                    time.getMonth(),
+                    time.getMonth()-1,
                     time.getDayOfMonth())
                     .show();
 

@@ -1,6 +1,10 @@
 package com.renatoawk.diary.util;
 
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class Time {
@@ -16,7 +20,7 @@ public class Time {
     public Integer getMinute(){ return this.calendar.get(Calendar.MINUTE);}
     public Integer getSecound(){ return 0; }
     public Integer getYear(){return this.calendar.get(Calendar.YEAR);}
-    public Integer getMonth(){return this.calendar.get(Calendar.MONTH);}
+    public Integer getMonth(){return this.calendar.get(Calendar.MONTH)+1;}
     public Integer getDayOfMonth(){return this.calendar.get(Calendar.DAY_OF_MONTH);}
 
     public Time(Integer hour, Integer minute) {
@@ -44,15 +48,39 @@ public class Time {
         this.setMinute(Integer.parseInt(valueS[1]));
     }
 
+    public void setTimeStamp(String value){
+        value = value.replaceAll("[^0-9-:]"," ");
+        String[] timestpam = value.split(" ");
+        String[] data = timestpam[0].split("-");
+        String[] time = timestpam[1].split(":");
+        this.setYear(Integer.valueOf(data[0]));
+        this.setMonth(Integer.valueOf(data[1])-1);
+        this.setDayOfMonth(Integer.valueOf(data[2]));
+        this.setHour(Integer.valueOf(time[0]));
+        this.setMinute(Integer.valueOf(time[1]));
+
+
+
+    }
+
 
     public String getFormatedTime(){
-        return this.getHour() +":"+
-                this.getMinute();
+        return fill(this.getHour(),2) +":"+
+                fill(this.getMinute(),2);
+    }
+
+    private String fill(int number, int lenght){
+        StringBuilder value = new StringBuilder(String.valueOf(number));
+        while (value.length() < lenght){
+            value.insert(0, "0");
+        }
+        return String.valueOf(value);
     }
 
     public String getFormatedDate(){
-        return this.getDayOfMonth() +"/"+
-                this.getMonth() +"/"+
+
+        return fill(this.getDayOfMonth(), 2) +"/"+
+                fill(this.getMonth(), 2) +"/"+
                 this.getYear();
     }
 

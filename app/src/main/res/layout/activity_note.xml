@@ -12,17 +12,18 @@
         app:layout_anchor="@id/toolbar_note"
         app:layout_anchorGravity="bottom"
         android:paddingTop="70dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:paddingLeft="@dimen/medium"
+        android:paddingRight="@dimen/medium">
 
             <EditText
                 android:id="@+id/text_note"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:background="@color/transparent"
                 android:layout_gravity="top"
                 android:focusable="true"
+                android:textSize="@dimen/h2"
                 android:hint="@string/touch_here_to_start_to_write"/>
 
 

@@ -3,43 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/CoordinatorLayoutBottom">
 
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycler_notes"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+            <androidx.core.widget.NestedScrollView style="@style/NestedScrollView">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_notes"
+                    style="@style/RecyclerView">
 
-                    </androidx.recyclerview.widget.RecyclerView>
+                </androidx.recyclerview.widget.RecyclerView>
 
             </androidx.core.widget.NestedScrollView>
 
-
-
-
             <com.google.android.material.bottomappbar.BottomAppBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/app_bar"
-                android:layout_gravity="bottom"
-                android:backgroundTint="@color/colorPrimary"
                 app:fabAlignmentMode="center"
                 app:navigationIcon="@drawable/ic_menu_black_24dp"
                 app:menu="@menu/bottom_app_bar"
                 app:hideOnScroll="true"
-                app:layout_scrollFlags="scroll|enterAlways"/>
+                app:layout_scrollFlags="scroll|enterAlways"
+                style="@style/BottomBar" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:src="@drawable/ic_add_black_24dp"
-                app:layout_anchor="@id/app_bar"/>
-
-
-
-
+                app:layout_anchor="@id/app_bar"
+                style="@style/Fab" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

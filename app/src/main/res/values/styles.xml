@@ -18,7 +18,7 @@
     <style name="TextInputLayoutFilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:layout_marginTop">@dimen/large</item>
         <item name="boxBackgroundColor">@color/transparent</item>
         <item name="android:textColorHint">@color/colorPrimary</item>
     </style>
@@ -27,15 +27,15 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:maxLength">100</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/h2</item>
         <item name="android:backgroundTint">@color/transparent</item>
     </style>
 
     <style name="MaterialButtonText" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">30dp</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginTop">@dimen/large</item>
+        <item name="android:textSize">@dimen/h2</item>
         <item name="strokeColor">@color/colorPrimary</item>
     </style>
 
@@ -43,7 +43,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:padding">30dp</item>
+        <item name="android:padding">@dimen/large</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -58,7 +58,7 @@
     <style name="title">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">36sp</item>
+        <item name="android:textSize">@dimen/h1</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textAlignment">center</item>
     </style>
@@ -66,6 +66,35 @@
     <style name="CoordinatorLayoutBottom">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+
+    <style name="NestedScrollView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/medium</item>
+    </style>
+
+    <style name="RecyclerView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="BottomBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+    </style>
+
+    <style name="Fab">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="NavigationView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">bottom</item>
     </style>
 

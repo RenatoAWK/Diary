@@ -16,6 +16,7 @@ import com.renatoawk.diary.Constants_url;
 import com.renatoawk.diary.R;
 import com.renatoawk.diary.gui.NotesActivity;
 import com.renatoawk.diary.gui.ProgressBarDialog;
+import com.renatoawk.diary.model.Note;
 import com.renatoawk.diary.model.Session;
 import com.renatoawk.diary.model.User;
 
@@ -25,7 +26,7 @@ import org.json.JSONObject;
 import java.util.Map;
 
 public class Volley {
-    public static void requestLogin(final Context context, final Map<String, String> map, User user){
+    public static void requestLogin(final Context context, final Map<String, String> map){
         final ProgressBarDialog progressBarDialog = new ProgressBarDialog(context);
         progressBarDialog.openDialog();
 
@@ -252,4 +253,77 @@ public class Volley {
         requestQueue.add(stringRequest);
 
     }
+
+    public static void requestNotes(final Context context, final String url_query, final Adapter adapter){
+        final ProgressBarDialog progressBarDialog = new ProgressBarDialog(context);
+        RequestQueue requestQueue = com.android.volley.toolbox.Volley.newRequestQueue(context);
+        final String url = Constants_url.URL_NOTE+url_query;
+        Response.Listener responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.has(Constants.STATUS)){
+                        if (jsonObject.get(Constants.STATUS).equals(Constants.INTERNAL_SERVER_ERROR)){
+                            new AlertDialog.Builder(context)
+                                    .setMessage(context.getString(R.string.request_error))
+                                    .setPositiveButton(context.getString(R.string.OK), null)
+                                    .show();
+
+                        } else if (jsonObject.get(Constants.STATUS).equals(Constants.NOT_ACCETABLE)){
+                            new AlertDialog.Builder(context)
+                                    .setMessage(context.getString(R.string.unknown_error))
+                                    .setPositiveButton(context.getString(R.string.OK), null)
+                                    .show();
+                        } else if (jsonObject.get(Constants.STATUS).equals(Constants.OK)){
+                            Session.user.getNotes().clear();
+                            for (int i = 0; i < jsonObject.getJSONArray(Constants.RESULTS).length(); i++) {
+                                Note note = new Note();
+                                note.setId(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(i));
+                                note.setCreated(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(i));
+                                note.setEdited(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(i));
+                                note.setEmotion(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(i));
+                                note.setText(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(i));
+                                Session.user.getNotes().add(note);
+
+                            }
+                            adapter.notifyDataSetChanged();
+
+                        }
+
+                    } else {
+                        new AlertDialog.Builder(context)
+                                .setMessage(context.getString(R.string.error))
+                                .setPositiveButton(context.getString(R.string.OK), null)
+                                .show();
+                    }
+
+                } catch (JSONException e) {
+                    new AlertDialog.Builder(context)
+                            .setMessage(context.getString(R.string.connection_error))
+                            .setPositiveButton(context.getString(R.string.OK), null)
+                            .show();
+                }
+            }
+
+
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressBarDialog.closeDialog();
+                new AlertDialog.Builder(context)
+                        .setMessage(context.getString(R.string.error))
+                        .setPositiveButton(context.getString(R.string.OK), null)
+                        .show();
+
+            }
+        };
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, responseListener, errorListener){};
+
+        requestQueue.add(stringRequest);
+    }
+
 }

@@ -21,8 +21,14 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
-            android:text="aaaa"/>
+            android:textColor="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/subtitle_recycler_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="italic"/>
 
         <TextView
             android:paddingTop="20dp"
@@ -31,8 +37,7 @@
             android:layout_height="match_parent"
             android:maxLines="6"
             android:ellipsize="end"
-            android:textSize="15sp"
-            android:text="aaaaaaaaaa"/>
+            android:textSize="15sp"/>
 
 
     </LinearLayout>

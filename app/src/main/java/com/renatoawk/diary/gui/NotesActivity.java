@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.VolleyError;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.renatoawk.diary.R;
@@ -19,6 +20,10 @@ import com.renatoawk.diary.model.Note;
 import com.renatoawk.diary.model.Session;
 import com.renatoawk.diary.util.Adapter;
 import com.renatoawk.diary.util.Time;
+import com.renatoawk.diary.util.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class NotesActivity extends AppCompatActivity {
     private BottomAppBar bottomAppBar;
@@ -70,21 +75,13 @@ public class NotesActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        String url_query = "?id_user="+ Session.user.getId();
+        adapter = new Adapter(Session.user.getNotes(), getApplicationContext());
         recyclerView = findViewById(R.id.recycler_notes);
-        //// teste
-        Session.user.getNotes().add(new Note(0, "teste0",0, new Time(), new Time()));
-        Session.user.getNotes().add(new Note(0, "teste1",0, new Time(), new Time()));
-        Session.user.getNotes().add(new Note(0, "teste2",0, new Time(), new Time()));
-        Session.user.getNotes().add(new Note(0, "teste3",0, new Time(), new Time()));
-        Session.user.getNotes().add(new Note(0, "teste4",0, new Time(), new Time()));
-        Session.user.getNotes().add(new Note(0, "teste5",0, new Time(), new Time()));
-        Session.user.getNotes().add(new Note(0, "teste6",0, new Time(), new Time()));
-        Session.user.getNotes().add(new Note(0, "teste7",0, new Time(), new Time()));
-        Session.user.getNotes().add(new Note(0, "teste8",0, new Time(), new Time()));
-        Session.user.getNotes().add(new Note(0, "teste9",0, new Time(), new Time()));
-        //// fim do teste
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        adapter = new Adapter(Session.user.getNotes());
         recyclerView.setAdapter(adapter);
+        Volley.requestNotes(NotesActivity.this, url_query, adapter);
+
+
     }
 }

@@ -72,7 +72,7 @@ public class NoteActivity extends AppCompatActivity {
                 }
             },
                     time.getYear(),
-                    time.getMonth(),
+                    time.getMonth()-1,
                     time.getDayOfMonth())
                     .show();
 
@@ -105,11 +105,6 @@ public class NoteActivity extends AppCompatActivity {
                 map.put(Constants.NOTE_ATTRIBUTE_CREATED, time.getTimeStampPostgres());
                 map.put(Constants.NOTE_ATTRIBUTE_EDITED, time.getTimeStampPostgres());
                 Volley.requestInsertNote(NoteActivity.this, map);
-
-                //teste
-
-                Session.user.getNotes().add(new Note(0,editText.getText().toString(),
-                        0, time, time));
 
 
             }

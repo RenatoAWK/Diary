@@ -12,7 +12,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.renatoawk.diary.Constants_url;
 import com.renatoawk.diary.R;
 import com.renatoawk.diary.gui.NotesActivity;
 import com.renatoawk.diary.gui.ProgressBarDialog;

@@ -1,6 +1,7 @@
 package com.renatoawk.diary.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.renatoawk.diary.R;
+import com.renatoawk.diary.gui.NoteActivity;
+import com.renatoawk.diary.gui.NotesActivity;
 import com.renatoawk.diary.model.Note;
 
 import java.util.ArrayList;
@@ -25,12 +28,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         private TextView sub;
         private TextView text;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, final Context context, final ArrayList<Note> data) {
             super(itemView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent intent = new Intent(context, NoteActivity.class);
+                    intent.putExtra(Constants.NOTE, data.get(getAdapterPosition()));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
 
                 }
             });
@@ -51,7 +58,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_item, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, context, data);
     }
 
     @Override

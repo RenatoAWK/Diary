@@ -1,12 +1,15 @@
 package com.renatoawk.diary.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.renatoawk.diary.util.Constants;
 import com.renatoawk.diary.util.Time;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Note {
+public class Note implements Parcelable {
     private long id;
     private String text;
     private int emotion;
@@ -104,4 +107,39 @@ public class Note {
             this.setText(jsonObject.getString(Constants.NOTE_COLUMN_TEXT));
         }
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeParcelable(this.edited, flags);
+        dest.writeString(this.text);
+        dest.writeInt(this.emotion);
+        dest.writeParcelable(this.created, flags);
+    }
+
+    public Note(Parcel in) {
+        this.id = in.readLong();
+        this.edited = in.readParcelable(Time.class.getClassLoader());
+        this.text = in.readString();
+        this.emotion = in.readInt();
+        this.created = in.readParcelable(Time.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Note> CREATOR = new Parcelable.Creator<Note>() {
+        @Override
+        public Note createFromParcel(Parcel source) {
+            return new Note(source);
+        }
+
+        @Override
+        public Note[] newArray(int size) {
+            return new Note[size];
+        }
+    };
 }

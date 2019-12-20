@@ -7,9 +7,13 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -30,6 +34,9 @@ public class NoteActivity extends AppCompatActivity {
     private Time time = new Time();
     private Toolbar toolbar;
     private EditText editText;
+    private Note note = null;
+    private boolean editMode = false;
+    private Menu menu;
 
 
     @Override
@@ -43,6 +50,43 @@ public class NoteActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        Intent intent = getIntent();
+        if (intent.hasExtra(Constants.NOTE)){
+            if (!editMode){
+                note = intent.getParcelableExtra(Constants.NOTE);
+                menu.findItem(R.id.edit_note).setVisible(true);
+                menu.findItem(R.id.delete_note).setVisible(true);
+                menu.findItem(R.id.calendar_note).setVisible(false);
+                menu.findItem(R.id.time_note).setVisible(false);
+                menu.findItem(R.id.add_note).setVisible(false);
+                editText.setClickable(false);
+                editText.setCursorVisible(false);
+                editText.setFocusable(false);
+                editText.setFocusableInTouchMode(false);
+                editText.setText(note.getText());
+            } else {
+                menu.findItem(R.id.edit_note).setVisible(false);
+                menu.findItem(R.id.delete_note).setVisible(false);
+                menu.findItem(R.id.calendar_note).setVisible(true);
+                menu.findItem(R.id.time_note).setVisible(true);
+                menu.findItem(R.id.add_note).setVisible(true);
+                editText.setClickable(true);
+                editText.setCursorVisible(true);
+                editText.setFocusable(true);
+                editText.setFocusableInTouchMode(true);
+                time = note.getEdited();
+
+            }
+        }
+
+        return true;
+
+    }
+
+
     private void setUpToolbar() {
         toolbar = findViewById(R.id.toolbar_note);
         toolbar.setTitle(time.getFormatedDateTime());
@@ -53,6 +97,7 @@ public class NoteActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_note, menu);
+        this.menu = menu;
         return true;
     }
 
@@ -99,15 +144,33 @@ public class NoteActivity extends AppCompatActivity {
                         .show();
             } else {
                 Map<String, String> map = new HashMap<>();
-                map.put(Constants.NOTE_ATTRIBUTE_ID_USER, String.valueOf(Session.user.getId()));
                 map.put(Constants.NOTE_ATTRIBUTE_TEXT, editText.getText().toString());
                 map.put(Constants.NOTE_ATTRIBUTE_EMOTION, "0");
                 map.put(Constants.NOTE_ATTRIBUTE_CREATED, time.getTimeStampPostgres());
                 map.put(Constants.NOTE_ATTRIBUTE_EDITED, time.getTimeStampPostgres());
-                Volley.requestInsertNote(NoteActivity.this, map);
+                if (editMode){
+                    Toast.makeText(this, "Vai chamar o volley", Toast.LENGTH_SHORT).show();
+                } else {
+                    map.put(Constants.NOTE_ATTRIBUTE_ID_USER, String.valueOf(Session.user.getId()));
+                    Volley.requestInsertNote(NoteActivity.this, map);
+                }
 
 
             }
+        } else if (item.getItemId() == R.id.edit_note){
+            editMode = true;
+            onPrepareOptionsMenu(menu);
+
+        } else if (item.getItemId() == R.id.delete_note){
+            new AlertDialog.Builder(this)
+                    .setMessage(getString(R.string.are_you_sure_you_want_to_delete_this_note))
+                    .setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(NoteActivity.this, "Chamar a volley pra apagar", Toast.LENGTH_SHORT).show();
+                        }
+                    }).setNegativeButton(getString(R.string.cancel), null)
+                    .show();
         }
 
         return true;

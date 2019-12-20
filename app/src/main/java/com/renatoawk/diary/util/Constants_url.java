@@ -1,4 +1,4 @@
-package com.renatoawk.diary;
+package com.renatoawk.diary.util;
 
 public final class Constants_url {
     public static final String URL_USER = "https://diary-node.herokuapp.com/user/create";

@@ -1,5 +1,8 @@
 package com.renatoawk.diary.util;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -7,7 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class Time {
+public class Time implements Parcelable {
     public Calendar calendar = Calendar.getInstance(Locale.getDefault());
 
     public void setHour(Integer value){this.calendar.set(Calendar.HOUR_OF_DAY, value);}
@@ -98,4 +101,31 @@ public class Time {
                 this.getDayOfMonth()+" "+ getFormatedTime()+":"+this.getSecound();
 
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeSerializable(this.calendar);
+    }
+
+    public Time(Parcel in) {
+        this.calendar = (Calendar) in.readSerializable();
+    }
+
+    public static final Parcelable.Creator<Time> CREATOR = new Parcelable.Creator<Time>() {
+        @Override
+        public Time createFromParcel(Parcel source) {
+            return new Time(source);
+        }
+
+        @Override
+        public Time[] newArray(int size) {
+            return new Time[size];
+        }
+    };
 }

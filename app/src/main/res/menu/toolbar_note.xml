@@ -18,6 +18,14 @@
     </item>
 
     <item
+        android:id="@+id/delete_note"
+        android:icon="@drawable/ic_delete_black_24dp"
+        app:showAsAction="always"
+        android:title="@string/edit"
+        android:visible="false">
+    </item>
+
+    <item
         android:id="@+id/calendar_note"
         android:icon="@drawable/ic_date_range_black_24dp"
         app:showAsAction="always"

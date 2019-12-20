@@ -7,6 +7,8 @@ public final class Constants {
     public static final int CREATED = 201;
     public static final int NOT_ACCETABLE = 406;
     public static final int INTERNAL_SERVER_ERROR = 500;
+    public static final String NOTE = "note";
+    public static final String USER = "user";
     public static final String RESULTS = "results";
     public static final String USER_COLUMN_NAME = "__name";
     public static final String USER_COLUMN_ID = "__id";

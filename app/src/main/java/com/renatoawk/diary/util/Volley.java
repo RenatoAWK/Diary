@@ -13,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.renatoawk.diary.R;
+import com.renatoawk.diary.gui.NoteActivity;
 import com.renatoawk.diary.gui.NotesActivity;
 import com.renatoawk.diary.gui.ProgressBarDialog;
 import com.renatoawk.diary.model.Note;
@@ -328,6 +329,156 @@ public class Volley {
         };
 
         requestQueue.add(stringRequest);
+    }
+
+    public static void requestEditNote(final Context context, final Map<String, String> map){
+
+        final ProgressBarDialog progressBarDialog = new ProgressBarDialog(context);
+        progressBarDialog.openDialog();
+
+        RequestQueue requestQueue = com.android.volley.toolbox.Volley.newRequestQueue(context);
+        String url = Constants_url.URL_NOTE_EDIT;
+
+        Response.Listener responseListener = new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                try {
+                    progressBarDialog.closeDialog();
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.has(Constants.STATUS)){
+                        if (jsonObject.get(Constants.STATUS).equals(Constants.INTERNAL_SERVER_ERROR)) {
+                            new AlertDialog.Builder(context)
+                                    .setMessage(context.getString(R.string.request_error))
+                                    .setPositiveButton(context.getString(R.string.OK), null)
+                                    .show();
+                        } else if (jsonObject.get(Constants.STATUS).equals(Constants.NOT_ACCETABLE)){
+                            new AlertDialog.Builder(context)
+                                    .setMessage(context.getString(R.string.unknown_error))
+                                    .setPositiveButton(context.getString(R.string.OK), null)
+                                    .show();
+                        } else if (jsonObject.get(Constants.STATUS).equals(Constants.OK)){
+                            progressBarDialog.closeDialog();
+                            ((Activity) context).finish();
+                        } else {
+                            new AlertDialog.Builder(context)
+                                    .setMessage(context.getString(R.string.error))
+                                    .setPositiveButton(context.getString(R.string.OK), null)
+                                    .show();
+                        }
+
+                    } else {
+                        new AlertDialog.Builder(context)
+                                .setMessage(context.getString(R.string.error))
+                                .setPositiveButton(context.getString(R.string.OK), null)
+                                .show();
+                    }
+
+                } catch (JSONException e) {
+                    new AlertDialog.Builder(context)
+                            .setMessage(context.getString(R.string.connection_error))
+                            .setPositiveButton(context.getString(R.string.OK), null)
+                            .show();
+                }
+
+            }
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressBarDialog.closeDialog();
+                new AlertDialog.Builder(context)
+                        .setMessage(context.getString(R.string.error))
+                        .setPositiveButton(context.getString(R.string.OK), null)
+                        .show();
+
+            }
+        };
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, responseListener, errorListener){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return map;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
+    }
+
+    public static void requestRemoveNote(final Context context, final Map<String, String> map) {
+
+        final ProgressBarDialog progressBarDialog = new ProgressBarDialog(context);
+        progressBarDialog.openDialog();
+
+        RequestQueue requestQueue = com.android.volley.toolbox.Volley.newRequestQueue(context);
+        String url = Constants_url.URL_NOTE_REMOVE;
+
+        Response.Listener responseListener = new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                try {
+                    progressBarDialog.closeDialog();
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.has(Constants.STATUS)){
+                        if (jsonObject.get(Constants.STATUS).equals(Constants.INTERNAL_SERVER_ERROR)) {
+                            new AlertDialog.Builder(context)
+                                    .setMessage(context.getString(R.string.request_error))
+                                    .setPositiveButton(context.getString(R.string.OK), null)
+                                    .show();
+                        } else if (jsonObject.get(Constants.STATUS).equals(Constants.NOT_ACCETABLE)){
+                            new AlertDialog.Builder(context)
+                                    .setMessage(context.getString(R.string.unknown_error))
+                                    .setPositiveButton(context.getString(R.string.OK), null)
+                                    .show();
+                        } else if (jsonObject.get(Constants.STATUS).equals(Constants.OK)){
+                            progressBarDialog.closeDialog();
+                            ((Activity) context).finish();
+                        } else {
+                            new AlertDialog.Builder(context)
+                                    .setMessage(context.getString(R.string.error))
+                                    .setPositiveButton(context.getString(R.string.OK), null)
+                                    .show();
+                        }
+
+                    } else {
+                        new AlertDialog.Builder(context)
+                                .setMessage(context.getString(R.string.error))
+                                .setPositiveButton(context.getString(R.string.OK), null)
+                                .show();
+                    }
+
+                } catch (JSONException e) {
+                    new AlertDialog.Builder(context)
+                            .setMessage(context.getString(R.string.connection_error))
+                            .setPositiveButton(context.getString(R.string.OK), null)
+                            .show();
+                }
+
+            }
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressBarDialog.closeDialog();
+                new AlertDialog.Builder(context)
+                        .setMessage(context.getString(R.string.error))
+                        .setPositiveButton(context.getString(R.string.OK), null)
+                        .show();
+
+            }
+        };
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, responseListener, errorListener){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return map;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
     }
 
 }

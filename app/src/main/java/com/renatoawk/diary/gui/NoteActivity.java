@@ -149,7 +149,8 @@ public class NoteActivity extends AppCompatActivity {
                 map.put(Constants.NOTE_ATTRIBUTE_CREATED, time.getTimeStampPostgres());
                 map.put(Constants.NOTE_ATTRIBUTE_EDITED, time.getTimeStampPostgres());
                 if (editMode){
-                    Toast.makeText(this, "Vai chamar o volley", Toast.LENGTH_SHORT).show();
+                    map.put(Constants.NOTE_ATTRIBUTE_ID, String.valueOf(note.getId()));
+                    Volley.requestEditNote(NoteActivity.this, map);
                 } else {
                     map.put(Constants.NOTE_ATTRIBUTE_ID_USER, String.valueOf(Session.user.getId()));
                     Volley.requestInsertNote(NoteActivity.this, map);
@@ -164,10 +165,12 @@ public class NoteActivity extends AppCompatActivity {
         } else if (item.getItemId() == R.id.delete_note){
             new AlertDialog.Builder(this)
                     .setMessage(getString(R.string.are_you_sure_you_want_to_delete_this_note))
-                    .setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+                    .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(NoteActivity.this, "Chamar a volley pra apagar", Toast.LENGTH_SHORT).show();
+                            Map<String, String> map = new HashMap<>();
+                            map.put(Constants.NOTE_ATTRIBUTE_ID, String.valueOf(note.getId()));
+                            Volley.requestRemoveNote(NoteActivity.this, map);
                         }
                     }).setNegativeButton(getString(R.string.cancel), null)
                     .show();

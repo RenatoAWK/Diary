@@ -9,18 +9,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.VolleyError;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.renatoawk.diary.R;
-import com.renatoawk.diary.model.Note;
 import com.renatoawk.diary.model.Session;
 import com.renatoawk.diary.util.Adapter;
 import com.renatoawk.diary.util.Constants;
-import com.renatoawk.diary.util.Time;
 import com.renatoawk.diary.util.Volley;
 
 import java.util.HashMap;
@@ -31,6 +29,7 @@ public class NotesActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private RecyclerView recyclerView;
     private Adapter adapter;
+    private NestedScrollView nestedScrollView;
 
 
     @Override
@@ -61,6 +60,7 @@ public class NotesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notes);
 
         bottomAppBar = findViewById(R.id.app_bar);
+        nestedScrollView = findViewById(R.id.nestedScrollViewNotes);
         fab = findViewById(R.id.fab);
         setSupportActionBar(bottomAppBar);
 
@@ -83,6 +83,7 @@ public class NotesActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(adapter);
         Volley.requestNotes(NotesActivity.this, map, adapter);
+        nestedScrollView.smoothScrollTo(0, 0);
 
 
     }

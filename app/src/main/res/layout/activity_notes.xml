@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/CoordinatorLayoutBottom">
 
-            <androidx.core.widget.NestedScrollView style="@style/NestedScrollView">
+            <androidx.core.widget.NestedScrollView
+                style="@style/NestedScrollView"
+                android:id="@+id/nestedScrollViewNotes">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_notes"

@@ -77,9 +77,11 @@ public class NoteActivity extends AppCompatActivity {
                 editText.setCursorVisible(true);
                 editText.setFocusable(true);
                 editText.setFocusableInTouchMode(true);
-                time = note.getEdited();
-
             }
+
+            time = note.getEdited();
+            setUpToolbar();
+
         }
 
         return true;

@@ -19,6 +19,7 @@ import com.renatoawk.diary.R;
 import com.renatoawk.diary.model.Note;
 import com.renatoawk.diary.model.Session;
 import com.renatoawk.diary.util.Adapter;
+import com.renatoawk.diary.util.Constants;
 import com.renatoawk.diary.util.Time;
 import com.renatoawk.diary.util.Volley;
 
@@ -75,12 +76,13 @@ public class NotesActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        String url_query = "?id_user="+ Session.user.getId();
+        Map<String, String> map = new HashMap<>();
+        map.put(Constants.NOTE_ATTRIBUTE_ID_USER, String.valueOf(Session.user.getId()));
         adapter = new Adapter(Session.user.getNotes(), getApplicationContext());
         recyclerView = findViewById(R.id.recycler_notes);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(adapter);
-        Volley.requestNotes(NotesActivity.this, url_query, adapter);
+        Volley.requestNotes(NotesActivity.this, map, adapter);
 
 
     }

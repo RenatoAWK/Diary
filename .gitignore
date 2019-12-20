@@ -85,5 +85,3 @@ lint/tmp/
 # lint/reports/
 
 .idea/
-
-app/src/main/java/com/renatoawk/diary/Constants_url.java

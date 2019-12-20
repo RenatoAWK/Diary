@@ -185,7 +185,7 @@ public class Volley {
         progressBarDialog.openDialog();
 
         RequestQueue requestQueue = com.android.volley.toolbox.Volley.newRequestQueue(context);
-        String url = Constants_url.URL_NOTE;
+        String url = Constants_url.URL_NOTE_CREATE;
 
         Response.Listener responseListener = new Response.Listener<String>(){
             @Override
@@ -254,10 +254,10 @@ public class Volley {
 
     }
 
-    public static void requestNotes(final Context context, final String url_query, final Adapter adapter){
+    public static void requestNotes(final Context context, final Map<String, String> map, final Adapter adapter){
         final ProgressBarDialog progressBarDialog = new ProgressBarDialog(context);
         RequestQueue requestQueue = com.android.volley.toolbox.Volley.newRequestQueue(context);
-        final String url = Constants_url.URL_NOTE+url_query;
+        final String url = Constants_url.URL_NOTE_GET;
         Response.Listener responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -321,7 +321,12 @@ public class Volley {
             }
         };
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, responseListener, errorListener){};
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, responseListener, errorListener){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return map;
+            }
+        };
 
         requestQueue.add(stringRequest);
     }

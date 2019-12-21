@@ -33,12 +33,8 @@ public class Note implements Parcelable {
     @ColumnInfo(name = "__edited")
     private Time edited;
 
-    @ColumnInfo(name = "__id_user")
-    private long id_user;
-
-    public Note(long id, long id_user, String text, int emotion, Time created, Time edited) {
+    public Note(long id, String text, int emotion, Time created, Time edited) {
         this.id = id;
-        this.id_user = id_user;
         this.text = text;
         this.emotion = emotion;
         this.created = created;
@@ -85,20 +81,6 @@ public class Note implements Parcelable {
 
     public void setEdited(Time edited) {
         this.edited = edited;
-    }
-
-    public long getId_user() {
-        return id_user;
-    }
-
-    public void setId_user(long id_user) {
-        this.id_user = id_user;
-    }
-
-    public void setId_user(JSONObject jsonObject) throws JSONException {
-        if (!jsonObject.isNull(Constants.NOTE_COLUMN_ID_USER)){
-            this.setId_user(jsonObject.getInt(Constants.NOTE_COLUMN_ID_USER));
-        }
     }
 
     public void setId(JSONObject jsonObject) throws JSONException {
@@ -156,7 +138,6 @@ public class Note implements Parcelable {
         dest.writeInt(this.emotion);
         dest.writeParcelable(this.created, flags);
         dest.writeParcelable(this.edited, flags);
-        dest.writeLong(this.id_user);
     }
 
     public Note(Parcel in) {
@@ -165,7 +146,6 @@ public class Note implements Parcelable {
         this.emotion = in.readInt();
         this.created = in.readParcelable(Time.class.getClassLoader());
         this.edited = in.readParcelable(Time.class.getClassLoader());
-        this.id_user = in.readLong();
     }
 
     public static final Parcelable.Creator<Note> CREATOR = new Parcelable.Creator<Note>() {

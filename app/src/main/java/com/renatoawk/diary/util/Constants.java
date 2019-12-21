@@ -18,6 +18,7 @@ public final class Constants {
     public static final String USER_COLUMN_TIME = "__time";
     public static final String USER_COLUMN_THEME = "__theme";
     public static final String NOTE_COLUMN_ID = "__id";
+    public static final String NOTE_COLUMN_ID_USER = "__id_user";
     public static final String NOTE_COLUMN_TEXT = "__text";
     public static final String NOTE_COLUMN_EMOTION = "__emotion";
     public static final String NOTE_COLUMN_CREATED = "__created";

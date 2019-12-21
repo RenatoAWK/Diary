@@ -284,6 +284,7 @@ public class Volley {
                                 note.setEdited(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(i));
                                 note.setEmotion(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(i));
                                 note.setText(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(i));
+                                note.setId_user(jsonObject.getJSONArray(Constants.RESULTS).getJSONObject(i));
                                 Session.user.getNotes().add(note);
 
                             }

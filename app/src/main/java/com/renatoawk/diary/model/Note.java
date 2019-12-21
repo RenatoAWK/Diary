@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import com.renatoawk.diary.util.Constants;
@@ -14,8 +13,6 @@ import com.renatoawk.diary.util.Time;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "_note")
 public class Note implements Parcelable {
@@ -36,7 +33,6 @@ public class Note implements Parcelable {
     @ColumnInfo(name = "__edited")
     private Time edited;
 
-    @ForeignKey(entity = User.class, parentColumns = "__id", childColumns = "__id_user", onDelete = CASCADE, onUpdate = CASCADE)
     @ColumnInfo(name = "__id_user")
     private long id_user;
 

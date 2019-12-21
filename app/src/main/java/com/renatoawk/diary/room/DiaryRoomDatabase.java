@@ -15,7 +15,6 @@ import java.util.concurrent.Executors;
 @Database(entities = {User.class, Note.class}, version = 1, exportSchema = false)
 public abstract class DiaryRoomDatabase extends RoomDatabase {
 
-    public abstract UserDao userDao();
     public abstract NoteDao noteDao();
 
     private static volatile DiaryRoomDatabase INSTANCE;

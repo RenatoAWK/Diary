@@ -1,10 +1,5 @@
 package com.renatoawk.diary.model;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
-
 import com.renatoawk.diary.util.Constants;
 import com.renatoawk.diary.util.Time;
 
@@ -13,33 +8,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-@Entity(tableName = "_user")
 public class User {
-
-    @ColumnInfo(name = "__name")
     private String name;
-
-    @ColumnInfo(name = "__password")
     private String password;
-
-    @PrimaryKey
-    @ColumnInfo(name = "__email")
     private String email;
-
-    @PrimaryKey
-    @ColumnInfo(name = "__id")
     private Integer id;
-
-    @ColumnInfo(name = "__notify")
     private boolean notify;
-
-    @ColumnInfo(name = "__time")
     private Time time;
-
-    @ColumnInfo(name = "__theme")
     private Integer theme;
-
-    @Ignore
     private ArrayList<Note> notes = new ArrayList<>();
 
     public User(){}

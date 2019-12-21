@@ -12,39 +12,13 @@ import java.util.List;
 
 public class Repository {
 
-    private UserDao userDao;
     private NoteDao noteDao;
     private LiveData<List<Note>> notes;
 
     public Repository(Application application){
         DiaryRoomDatabase db = DiaryRoomDatabase.getDatabase(application);
-        userDao = db.userDao();
         noteDao = db.noteDao();
         notes = noteDao.getByIdUser(Session.user.getId());
-    }
-
-    public void insertUser(User user){
-        DiaryRoomDatabase.databaseWriteExecutor.execute(() -> userDao.insert(user));
-    }
-
-    public void deleteUser(User user){
-        DiaryRoomDatabase.databaseWriteExecutor.execute(() -> userDao.delete(user));
-    }
-
-    public void deleteAllUser(){
-        DiaryRoomDatabase.databaseWriteExecutor.execute(() -> userDao.deleteAll());
-    }
-
-    public User getUser(int id){
-        return userDao.get(id);
-    }
-
-    public User getUser(String email){
-        return userDao.get(email);
-    }
-
-    public User login(String email, String password){
-        return userDao.login(email, password);
     }
 
     public void insertNote(Note note){
